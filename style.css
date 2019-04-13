@@ -1,0 +1,45 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.map {
+  height: 100vh;
+  width: 100vw;
+}
+
+.navigation {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 99;
+}
+
+.select-coordinates {
+  font-size: 16px;
+}
+
+.view-coordinates {
+  font-size: 16px;
+}
+
+.log {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 100;
+  display: none;
+  background-color: white;
+  border: 2px solid gray;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.log-coordinates {
+  margin: 10px;
+  padding: 0;
+}
