@@ -16,7 +16,7 @@ Draw and edit polygon in Google Map with the import / export functionality
 
 ## How it works
 
-- `input/coordinates.json` contains the coordinates that will be rendered
+- `input/coordinates.json` contains the coordinates that will be rendered. **It must follow the format specified in the `input/coordinates.json.template` file**
 - `.env.json` contains the Google API Key that is required to show the map (Google doesn't allow anymore to use the API without a key)
 
 ## Setup
