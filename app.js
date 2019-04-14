@@ -22,6 +22,8 @@ const loadGoogleMapsScript = async (googleMapApiKey, callbackFuncName) => {
 const setupCoordinatesSelector = coordinates => {
   const select = document.getElementById("select-coordinates");
 
+  select.innerHTML = "";
+
   coordinates.forEach(area => {
     var option = document.createElement("option");
     option.value = area.name;
