@@ -43,3 +43,11 @@ body {
   margin: 10px;
   padding: 0;
 }
+
+.upload {
+  display: none;
+}
+
+.upload-action {
+  font-size: 16px;
+}

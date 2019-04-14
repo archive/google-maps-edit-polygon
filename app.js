@@ -5,7 +5,11 @@ const getGoogleMapsApiKey = async () => {
 
 const getCoordinates = async () => {
   const response = await fetch("/input/coordinates.json");
-  return await response.json();
+  if (response.ok) {
+    return await response.json();
+  }
+
+  return [];
 };
 
 const loadGoogleMapsScript = async (googleMapApiKey, callbackFuncName) => {
@@ -30,8 +34,11 @@ const setupCoordinatesSelector = coordinates => {
   });
 };
 
-async function googleMapsScriptLoaded() {
-  const coordinates = await getCoordinates();
+async function googleMapsScriptLoaded(coordinates) {
+  coordinates = coordinates || (await getCoordinates());
+  if (!coordinates || coordinates.length < 1) {
+    return;
+  }
   setupCoordinatesSelector(coordinates);
   loadMap(coordinates[0].area);
 }
@@ -99,6 +106,24 @@ const logCoordinates = coordinates => {
   element.textContent = JSON.stringify(coordinates, null, 2);
 };
 
+const setupUploadCoordinates = () => {
+  const upload = document.getElementById("upload");
+  upload.addEventListener("change", event => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      const data = JSON.parse(evt.target.result);
+      googleMapsScriptLoaded(data);
+    };
+    reader.readAsBinaryString(file);
+  });
+
+  const uploadAction = document.getElementById("upload-action");
+  uploadAction.addEventListener("click", () => {
+    upload.click();
+  });
+};
+
 (async () => {
   const googleMapApiKey = await getGoogleMapsApiKey();
 
@@ -106,4 +131,5 @@ const logCoordinates = coordinates => {
   await loadGoogleMapsScript(googleMapApiKey, callbackFuncName);
 
   setupViewCoordinates();
+  setupUploadCoordinates();
 })();

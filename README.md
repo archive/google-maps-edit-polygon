@@ -31,7 +31,11 @@ Draw and edit polygon in Google Map with the import / export functionality
    (https://developers.google.com/maps/documentation/javascript/get-api-key)
 
 1. Create sample `coordinates.json` file:<br />
-   `yarn sample` (or `yarn sample-win` if you are on windows)
+   `yarn sample` (or `yarn sample-win` if you are on windows)<br />
+   <br />
+   or<br />
+   <br />
+   Upload the `coordinates.json` file during runtime
 
 1. Browse/view index.html via some http(s) server<br />
    (e.g. `yarn install http-server && http-server`)
