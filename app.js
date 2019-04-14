@@ -94,11 +94,13 @@ function polygonChanged() {
 
 const setupViewCoordinates = () => {
   const button = document.getElementById("view-coordinates");
-  button.addEventListener("click", () => {
-    const log = document.getElementById("log");
-    const style = getComputedStyle(log);
-    log.style.display = style.display === "none" ? "block" : "none";
-  });
+  button.addEventListener("click", toggleViewCoordinatesOverlay);
+};
+
+const toggleViewCoordinatesOverlay = () => {
+  const log = document.getElementById("log");
+  const style = getComputedStyle(log);
+  log.style.display = style.display === "none" ? "block" : "none";
 };
 
 const logCoordinates = coordinates => {
@@ -108,20 +110,22 @@ const logCoordinates = coordinates => {
 
 const setupUploadCoordinates = () => {
   const upload = document.getElementById("upload");
-  upload.addEventListener("change", event => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = function(evt) {
-      const data = JSON.parse(evt.target.result);
-      googleMapsScriptLoaded(data);
-    };
-    reader.readAsBinaryString(file);
-  });
+  upload.addEventListener("change", handleUploadedFile);
 
   const uploadAction = document.getElementById("upload-action");
   uploadAction.addEventListener("click", () => {
     upload.click();
   });
+};
+
+const handleUploadedFile = event => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    const data = JSON.parse(evt.target.result);
+    googleMapsScriptLoaded(data);
+  };
+  reader.readAsBinaryString(file);
 };
 
 (async () => {
